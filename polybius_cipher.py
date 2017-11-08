@@ -1,8 +1,9 @@
 from cipher import Cipher
 
-class polybius(Cipher):
 
-    def __init__(self,text,status):
+class Polybius(Cipher):
+    """From a new cipher parent class, creates a Polybius specific cipher class"""
+    def __init__(self, text, status):
         self.alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
         self.square = list("12345")
         self.pair = [(x, y) for x in self.square for y in self.square]
@@ -25,7 +26,6 @@ class polybius(Cipher):
         # assign the decrypted message attribute
         self.decrypted = letters
 
-
     def encrypt(self):
         """take a message and encrypts it using the polybius method, storing the value in self.encrypted attribute"""
         # build encrypted container
@@ -42,4 +42,6 @@ class polybius(Cipher):
 
         # assign encrypted message attribute
         self.encrypted = nums
+
+
 

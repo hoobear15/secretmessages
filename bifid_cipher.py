@@ -1,12 +1,14 @@
 from cipher import Cipher
 
+
 class Bifid(Cipher):
     """From a new cipher parent class, creates a bifid specific cipher class"""
-    def __init__(self,text,status):
+
+    def __init__(self, text, status):
         self.alphabet = list("ABCDEFGHIKLMNOPQRSTUVWXYZ")
         self.pair = [(x, y) for x in range(1, 6) for y in range(1, 6)]
         self.grid = {letter: coord for letter, coord in zip(self.alphabet, self.pair)}
-        super().__init__(text,status)
+        super().__init__(text, status)
 
     def decrypt(self):
         """take an encrypted message and decrypts it, storing the value in self.decrypted attribute"""
@@ -19,8 +21,8 @@ class Bifid(Cipher):
             numberline.append(self.grid[e][0])
             numberline.append(self.grid[e][1])
 
-        for i in range(int(len(numberline)/2)):
-           decryptcoords.append((numberline[i], numberline[i+int((len(numberline)/2))]))
+        for i in range(int(len(numberline) / 2)):
+            decryptcoords.append((numberline[i], numberline[i + int((len(numberline) / 2))]))
 
         message = ""
 
@@ -30,7 +32,6 @@ class Bifid(Cipher):
                     message += key
 
         self.decrypted = message
-
 
     def encrypt(self):
         """take a message and encrypts it using the bifid method, storing the value in self.encrypted attribute"""
@@ -55,12 +56,11 @@ class Bifid(Cipher):
 
         # combine sequence of two letters, swap with each letter in regular message
         swap = []
-        for e in range(1,len(numberline),2):
+        for e in range(1, len(numberline), 2):
             for key, value in self.grid.items():
-                if value == (numberline[e-1],numberline[e]):
+                if value == (numberline[e - 1], numberline[e]):
                     swap.append(key)
 
         message = "".join(swap)
 
         self.encrypted = message
-
